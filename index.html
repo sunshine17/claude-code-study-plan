@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3-Day Claude Code Sub-Agents Study Plan</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        
+        .progress-bar {
+            background: rgba(255,255,255,0.2);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            background: #4ecdc4;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+            border-radius: 4px;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: #e8f5e8;
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px;
+        }
+        
+        .stat {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #2e7d32;
+        }
+        
+        .stat-label {
+            color: #4e7c56;
+            font-size: 0.9em;
+        }
+        
+        .download-section {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44b3a8 100%);
+            color: white;
+            padding: 30px;
+            margin: 20px;
+            border-radius: 15px;
+        }
+        
+        .download-section h3 {
+            color: white;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .download-item {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .download-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+        
+        .download-item h4 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .download-item p {
+            color: rgba(255,255,255,0.9);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .download-btn {
+            background: white;
+            color: #4ecdc4;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .download-btn:hover {
+            background: #f0f0f0;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+        
+        .command-box {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            color: #e0e0e0;
+            overflow-x: auto;
+        }
+        
+        .copy-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8em;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #666;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            background: white;
+            color: #2c3e50;
+            border-bottom: 3px solid #4ecdc4;
+        }
+        
+        .tab:hover {
+            background: #e9ecef;
+        }
+        
+        .day-content {
+            display: none;
+            padding: 30px;
+        }
+        
+        .day-content.active {
+            display: block;
+        }
+        
+        .section {
+            margin-bottom: 30px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            border-left: 5px solid #4ecdc4;
+        }
+        
+        .section h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-icon {
+            font-size: 1.2em;
+        }
+        
+        .task-list {
+            list-style: none;
+        }
+        
+        .task-item {
+            background: white;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .task-item:hover {
+            border-color: #4ecdc4;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .task-checkbox {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        
+        .task-checkbox.checked {
+            background: #4ecdc4;
+            border-color: #4ecdc4;
+            position: relative;
+        }
+        
+        .task-checkbox.checked::after {
+            content: '✓';
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .task-content {
+            flex: 1;
+        }
+        
+        .task-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .task-description {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        
+        .time-estimate {
+            background: #e3f2fd;
+            color: #1976d2;
+            padding: 4px 8px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 8px;
+            display: inline-block;
+        }
+        
+        .resources {
+            background: #fff3e0;
+            border: 1px solid #ffcc02;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        
+        .resources h4 {
+            color: #f57c00;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .resources ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .resources li {
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .resources li::before {
+            content: '📖';
+            position: absolute;
+            left: 0;
+        }
+        
+        .resources a {
+            color: #f57c00;
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .resources a:hover {
+            text-decoration: underline;
+        }
+        
+        .tip-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+        }
+        
+        .tip-box h4 {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .day-content {
+                padding: 20px;
+            }
+            
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🤖 Claude Code Sub-Agents</h1>
+            <p>Master specialized AI assistants in 3 days</p>
+            <div class="progress-bar">
+                <div class="progress" id="overallProgress"></div>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat">
+                <div class="stat-number" id="completedTasks">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="totalTasks">19</div>
+                <div class="stat-label">Total Tasks</div>
+            </div>
+            <div class="stat">
+                <div class="stat-number" id="timeSpent">0h</div>
+                <div class="stat-label">Study Time</div>
+            </div>
+        </div>
+        
+        <div class="download-section">
+            <h3><span class="section-icon">📦</span>Downloadable Materials</h3>
+            <p>Get instant access to production-ready sub-agents and templates. Click to download or copy the commands below:</p>
+            
+            <div class="download-grid">
+                <div class="download-item">
+                    <h4>🎯 75 Production Agents</h4>
+                    <p>Complete collection by Seth Hobson with specialized agents for development, DevOps, security, and more.</p>
+                    <a href="https://github.com/wshobson/agents/archive/refs/heads/main.zip" class="download-btn" target="_blank">Download ZIP</a>
+                    <a href="https://github.com/wshobson/agents" class="download-btn" target="_blank">View on GitHub</a>
+                    <div class="command-box">
+                        cd ~/.claude<br>
+                        git clone https://github.com/wshobson/agents.git
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('cd ~/.claude && git clone https://github.com/wshobson/agents.git')">Copy Command</button>
+                </div>
+                
+                <div class="download-item">
+                    <h4>⚡ 100+ Specialized Agents</h4>
+                    <p>VoltAgent's comprehensive collection with AI/ML, data science, business operations, and full-stack development agents.</p>
+                    <a href="https://github.com/VoltAgent/awesome-claude-code-subagents/archive/refs/heads/main.zip" class="download-btn" target="_blank">Download ZIP</a>
+                    <a href="https://github.com/VoltAgent/awesome-claude-code-subagents" class="download-btn" target="_blank">View on GitHub</a>
+                    <div class="command-box">
+                        git clone https://github.com/VoltAgent/awesome-claude-code-subagents.git
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('git clone https://github.com/VoltAgent/awesome-claude-code-subagents.git')">Copy Command</button>
+                </div>
+                
+                <div class="download-item">
+                    <h4>🛠️ Workflow System</h4>
+                    <p>AI-driven development workflow system with orchestrated multi-agent pipelines and quality gates.</p>
+                    <a href="https://github.com/zhsama/claude-sub-agent/archive/refs/heads/main.zip" class="download-btn" target="_blank">Download ZIP</a>
+                    <a href="https://github.com/zhsama/claude-sub-agent" class="download-btn" target="_blank">View on GitHub</a>
+                    <div class="command-box">
+                        git clone https://github.com/zhsama/claude-sub-agent.git
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('git clone https://github.com/zhsama/claude-sub-agent.git')">Copy Command</button>
+                </div>
+                
+                <div class="download-item">
+                    <h4>📝 Cheat Sheets & Guides</h4>
+                    <p>Ultimate collection of tips, tricks, and workflows to master Claude Code quickly.</p>
+                    <a href="https://github.com/Njengah/claude-code-cheat-sheet/archive/refs/heads/main.zip" class="download-btn" target="_blank">Download ZIP</a>
+                    <a href="https://github.com/Njengah/claude-code-cheat-sheet" class="download-btn" target="_blank">View on GitHub</a>
+                    <div class="command-box">
+                        git clone https://github.com/Njengah/claude-code-cheat-sheet.git
+                    </div>
+                    <button class="copy-btn" onclick="copyToClipboard('git clone https://github.com/Njengah/claude-code-cheat-sheet.git')">Copy Command</button>
+                </div>
+            </div>
+            
+            <div style="margin-top: 25px; padding: 20px; background: rgba(255,255,255,0.1); border-radius: 10px;">
+                <h4 style="color: white; margin-bottom: 15px;">🚀 Quick Setup</h4>
+                <div class="command-box">
+                    # Create Claude agents directory<br>
+                    mkdir -p ~/.claude/agents<br>
+                    <br>
+                    # Download and install all collections<br>
+                    cd ~/.claude<br>
+                    git clone https://github.com/wshobson/agents.git<br>
+                    git clone https://github.com/VoltAgent/awesome-claude-code-subagents.git<br>
+                    <br>
+                    # Copy agents to your directory<br>
+                    cp agents/*.md ~/.claude/agents/<br>
+                    cp awesome-claude-code-subagents/agents/*/*.md ~/.claude/agents/
+                </div>
+                <button class="copy-btn" onclick="copyToClipboard('mkdir -p ~/.claude/agents && cd ~/.claude && git clone https://github.com/wshobson/agents.git && git clone https://github.com/VoltAgent/awesome-claude-code-subagents.git && cp agents/*.md ~/.claude/agents/ && cp awesome-claude-code-subagents/agents/*/*.md ~/.claude/agents/')">Copy Full Setup</button>
+            </div>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showDay(1)">Day 1: Foundations</button>
+            <button class="tab" onclick="showDay(2)">Day 2: Implementation</button>
+            <button class="tab" onclick="showDay(3)">Day 3: Advanced & Practice</button>
+        </div>
+        
+        <div id="day1" class="day-content active">
+            <div class="section">
+                <h3><span class="section-icon">🎯</span>Core Concepts</h3>
+                <ul class="task-list">
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Understand What Sub-Agents Are</div>
+                            <div class="task-description">Learn the fundamental concept: specialized AI assistants with their own context windows, system prompts, and tool permissions</div>
+                            <div class="time-estimate">30 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Key Benefits Deep Dive</div>
+                            <div class="task-description">Master context preservation, specialized expertise, reusability, and flexible permissions</div>
+                            <div class="time-estimate">20 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Architecture Understanding</div>
+                            <div class="task-description">Learn how sub-agents work with the main Claude Code instance and delegation patterns</div>
+                            <div class="time-estimate">25 min</div>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="resources">
+                    <h4>📚 Essential Reading</h4>
+                    <ul>
+                        <li><a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank">Official Sub-Agents Documentation</a></li>
+                        <li><a href="https://www.anthropic.com/engineering/claude-code-best-practices" target="_blank">Claude Code Best Practices Guide</a></li>
+                        <li><a href="https://claudelog.com/mechanics/custom-agents/" target="_blank">ClaudeLog: Understanding Custom Agents</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resources">
+                    <h4>🎥 Video Tutorials</h4>
+                    <ul>
+                        <li><a href="https://zazencodes.substack.com/p/claude-code-sub-agents-tutorial" target="_blank">ZazenCodes: Sub-Agents Tutorial (22 min video)</a></li>
+                        <li><a href="https://medium.com/@joe.njenga/how-im-using-claude-code-sub-agents-newest-feature-as-my-coding-army-9598e30c1318" target="_blank">Joe Njenga: Sub-Agents as Coding Army</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resources">
+                    <h4>📖 Learning Materials</h4>
+                    <ul>
+                        <li><a href="https://natesnewsletter.substack.com/p/the-claude-code-complete-guide-learn" target="_blank">The Claude Code Complete Guide</a></li>
+                        <li><a href="https://www.glennmeling.com/ai-hub/claude-code-prompt-cheat-sheet" target="_blank">Claude Code Prompt Cheat Sheet</a></li>
+                        <li><a href="https://github.com/Njengah/claude-code-cheat-sheet" target="_blank">Ultimate Claude Code Cheat Sheet</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h3><span class="section-icon">⚙️</span>Setup & Configuration</h3>
+                <ul class="task-list">
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Install/Update Claude Code</div>
+                            <div class="task-description">Ensure you have the latest version with sub-agents support (v1.0.60+)</div>
+                            <div class="time-estimate">10 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Understand File Structure</div>
+                            <div class="task-description">Learn project-level (.claude/agents/) vs user-level (~/.claude/agents/) locations and precedence</div>
+                            <div class="time-estimate">15 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">YAML Frontmatter Format</div>
+                            <div class="task-description">Master the markdown file structure with name, description, tools, and system prompt</div>
+                            <div class="time-estimate">20 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Download Ready-Made Templates</div>
+                            <div class="task-description">Clone production-ready agent collections for instant examples and inspiration</div>
+                            <div class="time-estimate">15 min</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="tip-box">
+                <h4>💡 Day 1 Pro Tip</h4>
+                <p>Focus on understanding the "why" before the "how". Sub-agents solve the context pollution problem that occurs when one conversation handles too many different tasks. Think of them as specialized team members, each with their own expertise.</p>
+            </div>
+        </div>
+        
+        <div id="day2" class="day-content">
+            <div class="section">
+                <h3><span class="section-icon">🛠️</span>Creating Your First Sub-Agents</h3>
+                <ul class="task-list">
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Use /agents Command</div>
+                            <div class="task-description">Practice the interactive interface for creating, editing, and managing sub-agents</div>
+                            <div class="time-estimate">30 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Create a Code Reviewer Agent</div>
+                            <div class="task-description">Build your first sub-agent focusing on code review with specific tools and prompts</div>
+                            <div class="time-estimate">45 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Create a Frontend Specialist</div>
+                            <div class="task-description">Build a React/Vue/Angular focused sub-agent with appropriate tool permissions</div>
+                            <div class="time-estimate">45 min</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h3><span class="section-icon">🎮</span>Tool Management & Permissions</h3>
+                <ul class="task-list">
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Understand Available Tools</div>
+                            <div class="task-description">Learn about edit, create, browser, grep, and MCP tools available to sub-agents</div>
+                            <div class="time-estimate">25 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Practice Tool Restriction</div>
+                            <div class="task-description">Create sub-agents with limited tool access for security and focus</div>
+                            <div class="time-estimate">20 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Test Automatic vs Manual Invocation</div>
+                            <div class="task-description">Practice both automatic delegation and explicit sub-agent requests</div>
+                            <div class="time-estimate">30 min</div>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="resources">
+                    <h4>🔧 Implementation Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/VoltAgent/awesome-claude-code-subagents" target="_blank">100+ Production-Ready Subagents Collection</a></li>
+                        <li><a href="https://github.com/wshobson/agents" target="_blank">75 Specialized Subagents by Seth Hobson</a></li>
+                        <li><a href="https://medium.com/@joe.njenga/17-claude-code-subagents-examples-with-templates-you-can-use-immediately-c70ef5567308" target="_blank">17 Subagent Templates You Can Use</a></li>
+                        <li><a href="https://jewelhuq.medium.com/practical-guide-to-mastering-claude-codes-main-agent-and-sub-agents-fd52952dcf00" target="_blank">Practical Laravel Example Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resources">
+                    <h4>🛠️ Templates & Examples</h4>
+                    <ul>
+                        <li><a href="https://github.com/hesreallyhim/awesome-claude-code-agents" target="_blank">Curated List of Awesome Agents</a></li>
+                        <li><a href="https://github.com/hesreallyhim/awesome-claude-code" target="_blank">Commands, Files & Workflows</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4>💡 Day 2 Pro Tip</h4>
+                <p>Start with Claude-generated agents and then customize them. Use phrases like "use PROACTIVELY" in descriptions to encourage automatic delegation. Remember: single responsibility principle applies to sub-agents too!</p>
+            </div>
+        </div>
+        
+        <div id="day3" class="day-content">
+            <div class="section">
+                <h3><span class="section-icon">🚀</span>Advanced Patterns</h3>
+                <ul class="task-list">
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Multi-Agent Workflows</div>
+                            <div class="task-description">Learn to chain sub-agents: architect → developer → reviewer → tester patterns</div>
+                            <div class="time-estimate">45 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Parallel Sub-Agent Execution</div>
+                            <div class="task-description">Practice running multiple sub-agents simultaneously for large codebases</div>
+                            <div class="time-estimate">30 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Team Collaboration Patterns</div>
+                            <div class="task-description">Set up project-level sub-agents for team sharing and version control</div>
+                            <div class="time-estimate">25 min</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="section">
+                <h3><span class="section-icon">🎯</span>Real-World Practice</h3>
+                <ul class="task-list">
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Build a Development Squad</div>
+                            <div class="task-description">Create 5+ specialized sub-agents for a complete development workflow</div>
+                            <div class="time-estimate">60 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Test with Real Project</div>
+                            <div class="task-description">Apply your sub-agents to an actual coding project and measure effectiveness</div>
+                            <div class="time-estimate">90 min</div>
+                        </div>
+                    </li>
+                    <li class="task-item" onclick="toggleTask(this)">
+                        <div class="task-checkbox"></div>
+                        <div class="task-content">
+                            <div class="task-title">Optimize & Document</div>
+                            <div class="task-description">Refine sub-agent prompts based on results and document your team's best practices</div>
+                            <div class="time-estimate">45 min</div>
+                        </div>
+                    </li>
+                </ul>
+                
+                <div class="resources">
+                    <h4>🎪 Advanced Resources</h4>
+                    <ul>
+                        <li><a href="https://github.com/zhsama/claude-sub-agent" target="_blank">AI-Driven Development Workflow System</a></li>
+                        <li><a href="https://cuong.io/blog/2025/06/24-claude-code-subagent-deep-dive" target="_blank">SubAgent Deep Dive: Parallel Execution</a></li>
+                        <li><a href="https://medianeth.dev/blog/claude-code-frameworks-subagents-2025" target="_blank">Frameworks & Sub-Agents: Complete 2025 Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="resources">
+                    <h4>📝 Practice Materials</h4>
+                    <ul>
+                        <li><strong>Ready-to-use Agent Categories:</strong> Development, DevOps, Testing, Security, AI/ML, SEO, Data Science</li>
+                        <li><strong>Template Patterns:</strong> Code reviewers, Test runners, Frontend specialists, Backend architects</li>
+                        <li><strong>Workflow Examples:</strong> Multi-agent chains, Parallel execution, Team collaboration</li>
+                    </ul>
+                </div>
+                
+                <div class="resources">
+                    <h4>⚡ Quick Reference</h4>
+                    <ul>
+                        <li><strong>Key Commands:</strong> /agents, /help, /memory</li>
+                        <li><strong>File Locations:</strong> ~/.claude/agents/ (global), .claude/agents/ (project)</li>
+                        <li><strong>YAML Structure:</strong> name, description, tools, system prompt</li>
+                        <li><strong>Invocation:</strong> Automatic delegation vs explicit "Use the [agent-name] to..."</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="tip-box">
+                <h4>💡 Day 3 Pro Tip</h4>
+                <p>Think beyond individual sub-agents to orchestrated workflows. Use the spec-orchestrator pattern for complex projects, and remember that sub-agents can communicate through shared files. Version control your best sub-agents!</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let completedCount = 0;
+        let totalTasks = 19;
+        let studyTime = 0;
+        
+        function showDay(dayNumber) {
+            // Hide all day contents
+            document.querySelectorAll('.day-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected day content
+            document.getElementById(`day${dayNumber}`).classList.add('active');
+            
+            // Add active class to selected tab
+            document.querySelectorAll('.tab')[dayNumber - 1].classList.add('active');
+        }
+        
+        function toggleTask(taskElement) {
+            const checkbox = taskElement.querySelector('.task-checkbox');
+            const isChecked = checkbox.classList.contains('checked');
+            
+            if (isChecked) {
+                checkbox.classList.remove('checked');
+                completedCount--;
+                
+                // Extract time from task and subtract
+                const timeElement = taskElement.querySelector('.time-estimate');
+                const timeText = timeElement.textContent;
+                const minutes = parseInt(timeText.match(/\d+/)[0]);
+                studyTime -= minutes;
+            } else {
+                checkbox.classList.add('checked');
+                completedCount++;
+                
+                // Extract time from task and add
+                const timeElement = taskElement.querySelector('.time-estimate');
+                const timeText = timeElement.textContent;
+                const minutes = parseInt(timeText.match(/\d+/)[0]);
+                studyTime += minutes;
+            }
+            
+            updateStats();
+            saveProgress();
+        }
+        
+        function updateStats() {
+            document.getElementById('completedTasks').textContent = completedCount;
+            document.getElementById('timeSpent').textContent = Math.floor(studyTime / 60) + 'h ' + (studyTime % 60) + 'm';
+            
+            const progressPercentage = (completedCount / totalTasks) * 100;
+            document.getElementById('overallProgress').style.width = progressPercentage + '%';
+        }
+        
+        function saveProgress() {
+            const taskStates = [];
+            document.querySelectorAll('.task-item').forEach((task, index) => {
+                const isChecked = task.querySelector('.task-checkbox').classList.contains('checked');
+                taskStates.push(isChecked);
+            });
+            
+            localStorage.setItem('claudeSubAgentsProgress', JSON.stringify({
+                taskStates: taskStates,
+                completedCount: completedCount,
+                studyTime: studyTime
+            }));
+        }
+        
+        function loadProgress() {
+            const saved = localStorage.getItem('claudeSubAgentsProgress');
+            if (saved) {
+                const data = JSON.parse(saved);
+                completedCount = data.completedCount || 0;
+                studyTime = data.studyTime || 0;
+                
+                if (data.taskStates) {
+                    document.querySelectorAll('.task-item').forEach((task, index) => {
+                        if (data.taskStates[index]) {
+                            task.querySelector('.task-checkbox').classList.add('checked');
+                        }
+                    });
+                }
+                
+                updateStats();
+            }
+        }
+        
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                // Show feedback
+                const event = window.event;
+                const button = event.target;
+                const originalText = button.textContent;
+                button.textContent = 'Copied!';
+                button.style.background = 'rgba(76, 175, 80, 0.3)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'rgba(255,255,255,0.2)';
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Could not copy text: ', err);
+                alert('Command copied to clipboard!');
+            });
+        }
+        
+        // Load progress on page load
+        document.addEventListener('DOMContentLoaded', loadProgress);
+    </script>
+</body>
+</html>
