@@ -13,40 +13,36 @@
         }
         
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'SF Pro Display', system-ui, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #e8e8e8;
+            background: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #21262d 100%);
             min-height: 100vh;
             padding: 20px;
+            font-size: 18px;
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            overflow: hidden;
         }
         
         .header {
-            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
-            color: white;
-            padding: 50px 30px;
+            padding: 60px 40px;
             text-align: center;
         }
         
         .header h1 {
-            font-size: 3em;
+            font-size: 3.2em;
             margin-bottom: 15px;
             font-weight: 700;
+            color: #58a6ff;
         }
         
         .header p {
             font-size: 1.3em;
-            opacity: 0.9;
-            max-width: 600px;
+            color: #8b949e;
+            max-width: 700px;
             margin: 0 auto;
         }
         
@@ -65,16 +61,20 @@
         .hero-stat-number {
             font-size: 2.5em;
             font-weight: bold;
-            color: #4ecdc4;
+            color: #7ce38b;
+            text-shadow: 0 0 10px rgba(124, 227, 139, 0.3);
         }
         
         .hero-stat-label {
-            color: rgba(255,255,255,0.8);
+            color: #8b949e;
             font-size: 0.9em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
         
+        
         .content {
-            padding: 50px 30px;
+            padding: 0 40px 50px 40px;
         }
         
         .intro {
@@ -83,70 +83,61 @@
         }
         
         .intro h2 {
-            font-size: 2.2em;
-            color: #2c3e50;
+            font-size: 2.4em;
+            color: #58a6ff;
             margin-bottom: 20px;
         }
         
         .intro p {
             font-size: 1.1em;
-            color: #666;
+            color: #8b949e;
             max-width: 800px;
             margin: 0 auto;
+            line-height: 1.7;
         }
         
         .plans-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 35px;
             margin-bottom: 50px;
         }
         
         .plan-card {
-            background: linear-gradient(135deg, #4ecdc4 0%, #44b3a8 100%);
-            border-radius: 20px;
-            padding: 40px 30px;
-            color: white;
+            background: rgba(22, 27, 34, 0.6);
+            border-radius: 12px;
+            padding: 35px 28px;
+            color: #e8e8e8;
             text-decoration: none;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+            backdrop-filter: blur(10px);
         }
         
         .plan-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            transform: translateY(-6px);
+            background: rgba(22, 27, 34, 0.8);
+            box-shadow: 0 20px 40px rgba(88, 166, 255, 0.15);
         }
         
-        .plan-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
-            pointer-events: none;
-        }
         
         .plan-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
+            font-size: 2.5em;
+            margin-bottom: 15px;
             display: block;
         }
         
         .plan-title {
-            font-size: 1.8em;
+            font-size: 1.6em;
             font-weight: 700;
-            margin-bottom: 15px;
-            color: white;
+            margin-bottom: 12px;
+            color: #58a6ff;
         }
         
         .plan-description {
-            font-size: 1em;
-            line-height: 1.6;
-            color: rgba(255,255,255,0.9);
-            margin-bottom: 25px;
+            font-size: 0.95em;
+            line-height: 1.5;
+            color: #8b949e;
+            margin-bottom: 20px;
         }
         
         .plan-meta {
@@ -157,56 +148,61 @@
         }
         
         .plan-duration {
-            background: rgba(255,255,255,0.2);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9em;
+            background: rgba(124, 227, 139, 0.1);
+            border: 1px solid rgba(124, 227, 139, 0.3);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
             font-weight: 600;
+            color: #7ce38b;
         }
         
         .plan-difficulty {
-            background: rgba(255,255,255,0.2);
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.9em;
+            background: rgba(255, 123, 114, 0.1);
+            border: 1px solid rgba(255, 123, 114, 0.3);
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.85em;
             font-weight: 600;
+            color: #ff7b72;
         }
         
         .plan-features {
             list-style: none;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         
         .plan-features li {
-            margin: 8px 0;
+            margin: 6px 0;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 0.95em;
-            color: rgba(255,255,255,0.9);
+            gap: 8px;
+            font-size: 0.9em;
+            color: #8b949e;
         }
         
         .plan-features li::before {
             content: '✓';
-            background: rgba(255,255,255,0.3);
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
+            background: rgba(124, 227, 139, 0.2);
+            color: #7ce38b;
+            border-radius: 3px;
+            width: 18px;
+            height: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: bold;
             flex-shrink: 0;
         }
         
         .plan-button {
-            background: white;
-            color: #4ecdc4;
+            background: #238636;
+            color: #ffffff;
             padding: 12px 25px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
+            border: 1px solid #2ea043;
+            border-radius: 8px;
+            font-weight: 600;
             font-size: 1em;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -217,39 +213,44 @@
         }
         
         .plan-button:hover {
-            background: #f0f0f0;
+            background: #2ea043;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 16px rgba(46, 160, 67, 0.2);
         }
         
         .coming-soon {
-            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+            background: #161b22;
+            border-color: #21262d;
+            opacity: 0.6;
             cursor: default;
             pointer-events: none;
         }
         
+        .coming-soon::before {
+            background: linear-gradient(90deg, #6e7681, #8b949e);
+        }
+        
         .coming-soon .plan-button {
-            background: rgba(255,255,255,0.3);
-            color: rgba(255,255,255,0.8);
+            background: #21262d;
+            color: #6e7681;
+            border-color: #30363d;
             cursor: not-allowed;
         }
         
         .github-section {
-            background: #f8f9fa;
-            border-radius: 15px;
-            padding: 40px;
+            padding: 50px;
             text-align: center;
-            margin: 40px 0;
+            margin: 60px 0;
         }
         
         .github-section h3 {
-            color: #2c3e50;
+            color: #58a6ff;
             font-size: 1.8em;
             margin-bottom: 15px;
         }
         
         .github-section p {
-            color: #666;
+            color: #8b949e;
             margin-bottom: 25px;
             font-size: 1.1em;
         }
@@ -262,8 +263,9 @@
         }
         
         .github-btn {
-            background: #24292e;
-            color: white;
+            background: #21262d;
+            color: #e8e8e8;
+            border: 1px solid #30363d;
             padding: 12px 25px;
             border-radius: 8px;
             text-decoration: none;
@@ -272,27 +274,29 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 1em;
         }
         
         .github-btn:hover {
-            background: #40464d;
+            background: #30363d;
+            border-color: #58a6ff;
             transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(88, 166, 255, 0.1);
         }
         
         .footer {
-            background: #2c3e50;
-            color: white;
-            padding: 30px;
+            color: #6e7681;
+            padding: 40px;
             text-align: center;
         }
         
         .footer p {
             margin-bottom: 10px;
-            opacity: 0.8;
+            font-size: 0.9em;
         }
         
         .footer a {
-            color: #4ecdc4;
+            color: #58a6ff;
             text-decoration: none;
         }
         
@@ -300,14 +304,16 @@
             text-decoration: underline;
         }
         
-        @media (max-width: 768px) {
-            .container {
-                margin: 10px;
-                border-radius: 15px;
+        @media (max-width: 1024px) {
+            .plans-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
             }
-            
+        }
+        
+        @media (max-width: 768px) {
             .header {
-                padding: 30px 20px;
+                padding: 40px 25px;
             }
             
             .header h1 {
@@ -315,16 +321,15 @@
             }
             
             .content {
-                padding: 30px 20px;
-            }
-            
-            .plans-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
+                padding: 0 25px 40px 25px;
             }
             
             .hero-stats {
                 gap: 25px;
+            }
+            
+            .github-section {
+                padding: 35px 25px;
             }
             
             .github-buttons {
@@ -357,11 +362,6 @@
         </div>
         
         <div class="content">
-            <div class="intro">
-                <h2>Master Claude Code Step by Step</h2>
-                <p>Each study plan is designed as an interactive, comprehensive learning experience with hands-on exercises, downloadable resources, and progress tracking. Start your journey to becoming a Claude Code expert!</p>
-            </div>
-            
             <div class="plans-grid">
                 <a href="sub-agents/" class="plan-card">
                     <span class="plan-icon">🤖</span>
