@@ -101,8 +101,7 @@
         }
         
         .stat-card {
-            background: #21262d;
-            border: 1px solid #30363d;
+            background: rgba(33, 38, 45, 0.6);
             border-radius: 6px;
             padding: 12px;
             text-align: center;
@@ -138,17 +137,21 @@
         }
         
         .download-item {
-            background: #21262d;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 15px;
-            margin-bottom: 12px;
+            padding: 15px 0;
+            margin-bottom: 15px;
+            border-bottom: 1px solid rgba(48, 54, 61, 0.5);
             transition: all 0.3s ease;
         }
         
+        .download-item:last-child {
+            border-bottom: none;
+        }
+        
         .download-item:hover {
-            background: #30363d;
-            border-color: #58a6ff;
+            background: rgba(22, 27, 34, 0.5);
+            margin: 0 -10px;
+            padding: 15px 10px;
+            border-radius: 6px;
         }
         
         .download-title {
@@ -192,6 +195,161 @@
             margin-right: 280px;
             flex: 1;
             background: #0d1117;
+            transition: margin-right 0.3s ease;
+        }
+        
+        .main-content.sidebar-collapsed {
+            margin-right: 40px;
+        }
+        
+        .right-sidebar {
+            width: 280px;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            background: linear-gradient(135deg, #161b22 0%, #21262d 100%);
+            border-left: 1px solid #30363d;
+            overflow-y: auto;
+            z-index: 100;
+            padding: 20px 0;
+            transition: transform 0.3s ease;
+        }
+        
+        .right-sidebar.collapsed {
+            transform: translateX(240px);
+        }
+        
+        .sidebar-toggle {
+            position: absolute;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #58a6ff;
+            border: 1px solid #58a6ff;
+            border-radius: 6px 0 0 6px;
+            color: white;
+            width: 40px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16px;
+            font-weight: bold;
+            z-index: 1001;
+            box-shadow: -2px 0 8px rgba(0,0,0,0.2);
+        }
+        
+        .sidebar-toggle:hover {
+            background: #79c0ff;
+            transform: translateY(-50%) scale(1.05);
+        }
+        
+        .sidebar-toggle .toggle-icon {
+            transition: transform 0.3s ease;
+        }
+        
+        .right-sidebar.collapsed .sidebar-toggle .toggle-icon {
+            transform: rotate(180deg);
+        }
+        
+        .sidebar-toggle .toggle-icon {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        
+        .outline-header {
+            padding: 0 20px 15px;
+            border-bottom: 1px solid #30363d;
+            margin-bottom: 20px;
+        }
+        
+        .outline-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            color: #58a6ff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .outline-subtitle {
+            font-size: 0.8em;
+            color: #8b949e;
+        }
+        
+        .toc-section {
+            margin-bottom: 25px;
+            padding: 0 20px;
+        }
+        
+        .toc-day-title {
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #7ce38b;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .toc-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-left: 15px;
+        }
+        
+        .toc-item {
+            position: relative;
+        }
+        
+        .toc-link {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 0.8em;
+            line-height: 1.4;
+            display: block;
+            padding: 4px 0;
+            transition: color 0.2s ease;
+            position: relative;
+        }
+        
+        .toc-link:hover {
+            color: #58a6ff;
+        }
+        
+        .toc-link.active {
+            color: #58a6ff;
+            font-weight: 500;
+        }
+        
+        .toc-link.active::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 16px;
+            background: #58a6ff;
+            border-radius: 2px;
+        }
+        
+        .toc-subsection {
+            margin-left: 12px;
+            margin-top: 6px;
+            padding-left: 12px;
+            border-left: 1px solid rgba(48, 54, 61, 0.5);
+        }
+        
+        .toc-subsection .toc-link {
+            font-size: 0.75em;
+            color: #6e7681;
         }
         
         
@@ -283,18 +441,14 @@
         }
         
         .section-header {
-            background: #161b22;
-            border-left: 3px solid #58a6ff;
-            padding: 15px 20px;
-            margin-bottom: 15px;
-            border-radius: 0 6px 6px 0;
-            border: 1px solid #30363d;
-            border-left: 3px solid #58a6ff;
+            padding: 20px 0 10px 0;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #30363d;
         }
         
         .section-header h3 {
             color: #58a6ff;
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: 600;
             display: flex;
             align-items: center;
@@ -309,19 +463,23 @@
         }
         
         .task-item {
-            background: #161b22;
-            border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 16px;
+            padding: 20px 0;
             cursor: pointer;
             transition: all 0.2s ease;
             display: flex;
-            gap: 12px;
+            gap: 15px;
+            border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+        }
+        
+        .task-item:last-child {
+            border-bottom: none;
         }
         
         .task-item:hover {
-            border-color: #58a6ff;
-            box-shadow: 0 2px 8px rgba(88, 166, 255, 0.1);
+            background: rgba(22, 27, 34, 0.3);
+            margin: 0 -15px;
+            padding: 20px 15px;
+            border-radius: 6px;
         }
         
         .task-checkbox {
@@ -390,35 +548,30 @@
         }
         
         .task-materials {
-            background: #21262d;
-            border-radius: 4px;
-            padding: 10px;
-            border-left: 3px solid #58a6ff;
-            border: 1px solid #30363d;
+            margin-top: 12px;
+            padding-left: 15px;
+            border-left: 2px solid #58a6ff;
         }
         
         .materials-title {
             font-size: 0.8em;
             font-weight: 600;
             color: #58a6ff;
-            margin-bottom: 6px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            margin-bottom: 8px;
         }
         
         .materials-list {
             list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 6px;
         }
         
         .material-item {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 0.75em;
+            gap: 8px;
+            font-size: 0.85em;
         }
         
         .material-link {
@@ -435,21 +588,19 @@
         .material-type {
             background: rgba(124, 227, 139, 0.1);
             color: #7ce38b;
-            border: 1px solid rgba(124, 227, 139, 0.3);
-            padding: 1px 6px;
-            border-radius: 3px;
-            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
             font-weight: 500;
         }
         
         .tip-box {
-            background: #161b22;
+            background: rgba(255, 166, 87, 0.1);
             color: #e8e8e8;
-            border: 1px solid #30363d;
             border-left: 3px solid #ffa657;
-            padding: 18px;
+            padding: 20px;
             border-radius: 6px;
-            margin: 20px 0;
+            margin: 30px 0;
         }
         
         .tip-box h4 {
@@ -485,7 +636,26 @@
         
         @media (max-width: 1200px) {
             .main-content {
+                margin-right: 50px;
+            }
+            
+            .main-content.sidebar-collapsed {
                 margin-right: 0;
+            }
+            
+            .right-sidebar {
+                width: 260px;
+                transform: translateX(210px);
+            }
+            
+            .right-sidebar.collapsed {
+                transform: translateX(260px);
+            }
+            
+            .sidebar-toggle {
+                left: -40px;
+                width: 40px;
+                height: 50px;
             }
         }
         
@@ -535,6 +705,7 @@
 <body>
     <div class="app-container">
         <button class="mobile-sidebar-toggle" onclick="toggleSidebar()">☰</button>
+        
         
         <div class="sidebar" id="sidebar">
             <div class="sidebar-header">
@@ -603,6 +774,88 @@
                         <a href="https://github.com/Njengah/claude-code-cheat-sheet" class="download-btn" target="_blank">GitHub</a>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- Floating toggle button -->
+        <button onclick="toggleRightSidebar()" style="position: fixed; right: 290px; top: 50%; transform: translateY(-50%); z-index: 9999; background: #58a6ff; color: white; border: none; border-radius: 4px 0 0 4px; width: 30px; height: 60px; cursor: pointer; transition: all 0.3s ease;" id="floatingToggle">
+            <span id="toggleIcon">‹</span>
+        </button>
+        
+        <div class="right-sidebar" id="rightSidebar">
+            <div class="sidebar-toggle" onclick="toggleRightSidebar()" title="Toggle Navigation" style="display: none;">
+                <span class="toggle-icon">‹</span>
+            </div>
+            <div class="outline-header">
+                <h3 class="outline-title">📋 Quick Navigation</h3>
+                <p class="outline-subtitle">Jump to any section</p>
+            </div>
+            
+            <div class="toc-section" data-day="1">
+                <div class="toc-day-title">🎯 Day 1: Foundations</div>
+                <ul class="toc-list">
+                    <li class="toc-item">
+                        <a href="#day1-core-concepts" class="toc-link" onclick="scrollToSection('day1-core-concepts')">Core Concepts</a>
+                        <div class="toc-subsection">
+                            <a href="#understand-subagents" class="toc-link" onclick="scrollToSection('understand-subagents')">What Sub-Agents Are</a>
+                            <a href="#key-benefits" class="toc-link" onclick="scrollToSection('key-benefits')">Key Benefits</a>
+                            <a href="#architecture" class="toc-link" onclick="scrollToSection('architecture')">Architecture</a>
+                        </div>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#day1-setup" class="toc-link" onclick="scrollToSection('day1-setup')">Setup & Configuration</a>
+                        <div class="toc-subsection">
+                            <a href="#install-update" class="toc-link" onclick="scrollToSection('install-update')">Install/Update</a>
+                            <a href="#file-structure" class="toc-link" onclick="scrollToSection('file-structure')">File Structure</a>
+                            <a href="#yaml-format" class="toc-link" onclick="scrollToSection('yaml-format')">YAML Format</a>
+                            <a href="#templates" class="toc-link" onclick="scrollToSection('templates')">Templates</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="toc-section" data-day="2">
+                <div class="toc-day-title">🛠️ Day 2: Implementation</div>
+                <ul class="toc-list">
+                    <li class="toc-item">
+                        <a href="#day2-creating" class="toc-link" onclick="scrollToSection('day2-creating')">Creating Sub-Agents</a>
+                        <div class="toc-subsection">
+                            <a href="#agents-command" class="toc-link" onclick="scrollToSection('agents-command')">/agents Command</a>
+                            <a href="#code-reviewer" class="toc-link" onclick="scrollToSection('code-reviewer')">Code Reviewer</a>
+                            <a href="#frontend-specialist" class="toc-link" onclick="scrollToSection('frontend-specialist')">Frontend Specialist</a>
+                        </div>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#day2-tools" class="toc-link" onclick="scrollToSection('day2-tools')">Tool Management</a>
+                        <div class="toc-subsection">
+                            <a href="#available-tools" class="toc-link" onclick="scrollToSection('available-tools')">Available Tools</a>
+                            <a href="#tool-restriction" class="toc-link" onclick="scrollToSection('tool-restriction')">Tool Restriction</a>
+                            <a href="#invocation" class="toc-link" onclick="scrollToSection('invocation')">Invocation</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="toc-section" data-day="3">
+                <div class="toc-day-title">🚀 Day 3: Advanced</div>
+                <ul class="toc-list">
+                    <li class="toc-item">
+                        <a href="#day3-patterns" class="toc-link" onclick="scrollToSection('day3-patterns')">Advanced Patterns</a>
+                        <div class="toc-subsection">
+                            <a href="#multi-agent" class="toc-link" onclick="scrollToSection('multi-agent')">Multi-Agent Workflows</a>
+                            <a href="#parallel" class="toc-link" onclick="scrollToSection('parallel')">Parallel Execution</a>
+                            <a href="#collaboration" class="toc-link" onclick="scrollToSection('collaboration')">Team Collaboration</a>
+                        </div>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#day3-practice" class="toc-link" onclick="scrollToSection('day3-practice')">Real-World Practice</a>
+                        <div class="toc-subsection">
+                            <a href="#dev-squad" class="toc-link" onclick="scrollToSection('dev-squad')">Development Squad</a>
+                            <a href="#real-project" class="toc-link" onclick="scrollToSection('real-project')">Real Project</a>
+                            <a href="#optimize" class="toc-link" onclick="scrollToSection('optimize')">Optimize & Document</a>
+                        </div>
+                    </li>
+                </ul>
             </div>
         </div>
         
@@ -1207,8 +1460,11 @@
             sidebar.classList.toggle('open');
         }
         
-        // Load progress on page load
-        document.addEventListener('DOMContentLoaded', loadProgress);
+        // Load progress and sidebar state on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProgress();
+            loadRightSidebarState();
+        });
         
         // Scroll to section functionality
         function scrollToSection(sectionId) {
@@ -1296,6 +1552,46 @@
             originalShowDay(dayNumber);
             updateTocForDay(dayNumber);
         };
+        
+        // Right sidebar toggle functionality
+        function toggleRightSidebar() {
+            const rightSidebar = document.getElementById('rightSidebar');
+            const mainContent = document.querySelector('.main-content');
+            const floatingToggle = document.getElementById('floatingToggle');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            rightSidebar.classList.toggle('collapsed');
+            mainContent.classList.toggle('sidebar-collapsed');
+            
+            // Update floating button position and icon
+            if (rightSidebar.classList.contains('collapsed')) {
+                floatingToggle.style.right = '10px';
+                toggleIcon.innerHTML = '›';
+            } else {
+                floatingToggle.style.right = '290px';
+                toggleIcon.innerHTML = '‹';
+            }
+            
+            // Save state to localStorage
+            localStorage.setItem('rightSidebarCollapsed', rightSidebar.classList.contains('collapsed'));
+        }
+        
+        // Load right sidebar state
+        function loadRightSidebarState() {
+            const isCollapsed = localStorage.getItem('rightSidebarCollapsed') === 'true';
+            const floatingToggle = document.getElementById('floatingToggle');
+            const toggleIcon = document.getElementById('toggleIcon');
+            
+            if (isCollapsed) {
+                document.getElementById('rightSidebar').classList.add('collapsed');
+                document.querySelector('.main-content').classList.add('sidebar-collapsed');
+                floatingToggle.style.right = '10px';
+                toggleIcon.innerHTML = '›';
+            } else {
+                floatingToggle.style.right = '290px';
+                toggleIcon.innerHTML = '‹';
+            }
+        }
         
         // Close sidebar when clicking outside on mobile
         document.addEventListener('click', function(e) {
