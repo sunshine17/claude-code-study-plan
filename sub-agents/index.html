@@ -1315,6 +1315,8 @@
         
         // Scroll to section functionality
         function scrollToSection(sectionId) {
+            console.log('Scrolling to section:', sectionId);
+            
             // First, make sure the correct day tab is active
             let dayNumber = 1;
             
@@ -1325,28 +1327,37 @@
             if (day2Sections.includes(sectionId)) dayNumber = 2;
             if (day3Sections.includes(sectionId)) dayNumber = 3;
             
+            console.log('Switching to day:', dayNumber);
             showDay(dayNumber);
             
             // Wait longer for tab content to show and DOM to update
             setTimeout(() => {
                 const element = document.getElementById(sectionId);
+                console.log('Found element:', element ? 'YES' : 'NO', sectionId);
+                
                 if (element) {
                     // Check if element is visible (in case it's still in a hidden tab)
                     const dayContent = element.closest('.day-content');
+                    const isActive = dayContent && dayContent.classList.contains('active');
+                    console.log('Day content active:', isActive);
+                    
                     if (dayContent && !dayContent.classList.contains('active')) {
                         console.warn(`Section ${sectionId} is in inactive day content`);
                         return;
                     }
                     
-                    // Get header height for offset
-                    const headerHeight = document.querySelector('.tabs').offsetHeight + 60;
-                    const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
-                    const offsetPosition = elementPosition - headerHeight;
-                    
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: 'smooth'
+                    // Simpler scroll approach
+                    element.scrollIntoView({ 
+                        behavior: 'smooth',
+                        block: 'start'
                     });
+                    
+                    // Adjust for header after scroll completes
+                    setTimeout(() => {
+                        const tabsElement = document.querySelector('.tabs');
+                        const headerHeight = (tabsElement ? tabsElement.offsetHeight : 0) + 20;
+                        window.scrollBy(0, -headerHeight);
+                    }, 100);
                     
                     // Update active TOC link
                     updateActiveTocLink(sectionId);
