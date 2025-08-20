@@ -1,9 +1,9 @@
-# Claude Code Study Plans Hub
+# AI Development Study Plans Hub
 
-![Claude Code](https://img.shields.io/badge/Claude%20Code-Study%20Plans-blue?style=for-the-badge)
+![AI Development](https://img.shields.io/badge/AI%20Development-Study%20Plans-blue?style=for-the-badge)
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-green?style=for-the-badge)
 
-Interactive study plans for mastering Claude Code features with downloadable resources, progress tracking, and hands-on exercises.
+Interactive study plans for mastering AI development tools and features with downloadable resources, progress tracking, and hands-on exercises.
 
 ## 🚀 Live Site
 
@@ -34,7 +34,7 @@ Master specialized AI assistants with their own context windows, system prompts,
 - Real-world implementation
 
 ### 🔧 MCP Integration (Coming Soon)
-Deep dive into Model Context Protocol for extending Claude Code with custom tools and integrations.
+Deep dive into Model Context Protocol for extending AI development with custom tools and integrations.
 
 ### ⚡ Advanced Workflows (Coming Soon)
 Master complex development workflows, CI/CD integration, and enterprise-scale deployments.
@@ -64,7 +64,7 @@ cd claude-code-study-plan
 
 ## 📖 Additional Resources
 
-- [Official Claude Code Documentation](https://docs.anthropic.com/en/docs/claude-code)
+- [Official AI Development Documentation](https://docs.anthropic.com/en/docs/claude-code)
 - [Sub-Agents Documentation](https://docs.anthropic.com/en/docs/claude-code/sub-agents)
 - [Community Agent Collections](https://github.com/VoltAgent/awesome-claude-code-subagents)
 
@@ -83,8 +83,8 @@ This project is open source and available under the [MIT License](LICENSE).
 
 <div align="center">
 
-**🤖 Generated with [Claude Code](https://claude.ai/code)**
+**🤖 AI-Powered Learning Platform**
 
-*Master Claude Code Sub-Agents in just 3 days*
+*Master AI Sub-Agents in just 3 days*
 
 </div>
