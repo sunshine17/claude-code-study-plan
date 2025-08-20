@@ -175,8 +175,87 @@
         
         .main-content {
             margin-left: 300px;
+            margin-right: 280px;
             flex: 1;
             background: white;
+        }
+        
+        .right-sidebar {
+            width: 280px;
+            background: white;
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            z-index: 999;
+            border-left: 1px solid #e2e8f0;
+            padding: 20px;
+        }
+        
+        .toc-header {
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #475569;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        
+        .toc-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .toc-item {
+            margin-bottom: 8px;
+        }
+        
+        .toc-link {
+            display: block;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 0.8em;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            border-left: 2px solid transparent;
+        }
+        
+        .toc-link:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+        
+        .toc-link.active {
+            background: #dbeafe;
+            color: #1d4ed8;
+            border-left-color: #3b82f6;
+            font-weight: 500;
+        }
+        
+        .toc-section {
+            margin-bottom: 20px;
+        }
+        
+        .toc-section-title {
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #374151;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .toc-subsection {
+            margin-left: 12px;
+            margin-top: 4px;
+        }
+        
+        .toc-subsection .toc-link {
+            font-size: 0.75em;
+            color: #6b7280;
+            padding: 4px 8px;
         }
         
         .content-header {
@@ -433,6 +512,16 @@
             font-size: 16px;
         }
         
+        @media (max-width: 1200px) {
+            .right-sidebar {
+                display: none;
+            }
+            
+            .main-content {
+                margin-right: 0;
+            }
+        }
+        
         @media (max-width: 768px) {
             .sidebar {
                 transform: translateX(-100%);
@@ -446,6 +535,7 @@
             
             .main-content {
                 margin-left: 0;
+                margin-right: 0;
             }
             
             .mobile-sidebar-toggle {
@@ -562,12 +652,12 @@
             </div>
             
             <div id="day1" class="day-content active">
-                <div class="section">
+                <div class="section" id="day1-core-concepts">
                     <div class="section-header">
                         <h3><span>🎯</span>Core Concepts</h3>
                     </div>
                     <ul class="task-list">
-                        <li class="task-item" onclick="toggleTask(this)">
+                        <li class="task-item" onclick="toggleTask(this)" id="understand-subagents">
                             <div class="task-checkbox"></div>
                             <div class="task-content">
                                 <div class="task-header">
@@ -631,7 +721,7 @@
                     </ul>
                 </div>
                 
-                <div class="section">
+                <div class="section" id="day1-setup">
                     <div class="section-header">
                         <h3><span>⚙️</span>Setup & Configuration</h3>
                     </div>
@@ -1055,6 +1145,77 @@
                 </div>
             </div>
         </div>
+        
+        <div class="right-sidebar" id="rightSidebar">
+            <div class="toc-header">On this page</div>
+            
+            <div class="toc-section">
+                <div class="toc-section-title">Day 1: Foundations</div>
+                <ul class="toc-list">
+                    <li class="toc-item">
+                        <a href="#day1-core-concepts" class="toc-link" onclick="scrollToSection('day1-core-concepts')">Core Concepts</a>
+                        <div class="toc-subsection">
+                            <a href="#understand-subagents" class="toc-link" onclick="scrollToSection('understand-subagents')">Understanding Sub-Agents</a>
+                            <a href="#key-benefits" class="toc-link" onclick="scrollToSection('key-benefits')">Key Benefits</a>
+                            <a href="#architecture" class="toc-link" onclick="scrollToSection('architecture')">Architecture</a>
+                        </div>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#day1-setup" class="toc-link" onclick="scrollToSection('day1-setup')">Setup & Configuration</a>
+                        <div class="toc-subsection">
+                            <a href="#install-update" class="toc-link" onclick="scrollToSection('install-update')">Install/Update</a>
+                            <a href="#file-structure" class="toc-link" onclick="scrollToSection('file-structure')">File Structure</a>
+                            <a href="#yaml-format" class="toc-link" onclick="scrollToSection('yaml-format')">YAML Format</a>
+                            <a href="#templates" class="toc-link" onclick="scrollToSection('templates')">Templates</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="toc-section">
+                <div class="toc-section-title">Day 2: Implementation</div>
+                <ul class="toc-list">
+                    <li class="toc-item">
+                        <a href="#day2-creating" class="toc-link" onclick="scrollToSection('day2-creating')">Creating First Sub-Agents</a>
+                        <div class="toc-subsection">
+                            <a href="#agents-command" class="toc-link" onclick="scrollToSection('agents-command')">/agents Command</a>
+                            <a href="#code-reviewer" class="toc-link" onclick="scrollToSection('code-reviewer')">Code Reviewer</a>
+                            <a href="#frontend-specialist" class="toc-link" onclick="scrollToSection('frontend-specialist')">Frontend Specialist</a>
+                        </div>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#day2-tools" class="toc-link" onclick="scrollToSection('day2-tools')">Tool Management</a>
+                        <div class="toc-subsection">
+                            <a href="#available-tools" class="toc-link" onclick="scrollToSection('available-tools')">Available Tools</a>
+                            <a href="#tool-restriction" class="toc-link" onclick="scrollToSection('tool-restriction')">Tool Restriction</a>
+                            <a href="#invocation" class="toc-link" onclick="scrollToSection('invocation')">Invocation Methods</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="toc-section">
+                <div class="toc-section-title">Day 3: Advanced</div>
+                <ul class="toc-list">
+                    <li class="toc-item">
+                        <a href="#day3-patterns" class="toc-link" onclick="scrollToSection('day3-patterns')">Advanced Patterns</a>
+                        <div class="toc-subsection">
+                            <a href="#multi-agent" class="toc-link" onclick="scrollToSection('multi-agent')">Multi-Agent Workflows</a>
+                            <a href="#parallel" class="toc-link" onclick="scrollToSection('parallel')">Parallel Execution</a>
+                            <a href="#collaboration" class="toc-link" onclick="scrollToSection('collaboration')">Team Collaboration</a>
+                        </div>
+                    </li>
+                    <li class="toc-item">
+                        <a href="#day3-practice" class="toc-link" onclick="scrollToSection('day3-practice')">Real-World Practice</a>
+                        <div class="toc-subsection">
+                            <a href="#dev-squad" class="toc-link" onclick="scrollToSection('dev-squad')">Development Squad</a>
+                            <a href="#real-project" class="toc-link" onclick="scrollToSection('real-project')">Real Project</a>
+                            <a href="#optimize" class="toc-link" onclick="scrollToSection('optimize')">Optimize & Document</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -1151,6 +1312,58 @@
         
         // Load progress on page load
         document.addEventListener('DOMContentLoaded', loadProgress);
+        
+        // Scroll to section functionality
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Update active TOC link
+                updateActiveTocLink(sectionId);
+            }
+        }
+        
+        function updateActiveTocLink(activeId) {
+            // Remove active class from all TOC links
+            document.querySelectorAll('.toc-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Add active class to current link
+            const activeLink = document.querySelector(`a[href="#${activeId}"]`);
+            if (activeLink) {
+                activeLink.classList.add('active');
+            }
+        }
+        
+        // Intersection Observer for automatic TOC highlighting
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50px 0px -50px 0px',
+            threshold: 0.1
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    updateActiveTocLink(entry.target.id);
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all sections with IDs
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('[id]');
+            sections.forEach(section => {
+                if (section.id && section.id !== 'sidebar' && section.id !== 'rightSidebar') {
+                    observer.observe(section);
+                }
+            });
+        });
         
         // Close sidebar when clicking outside on mobile
         document.addEventListener('click', function(e) {
