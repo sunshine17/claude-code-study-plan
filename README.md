@@ -1,54 +1,57 @@
-# Claude Code Sub-Agents Study Plan
+# Claude Code Study Plans Hub
 
-![Claude Code](https://img.shields.io/badge/Claude%20Code-Sub--Agents-blue?style=for-the-badge)
+![Claude Code](https://img.shields.io/badge/Claude%20Code-Study%20Plans-blue?style=for-the-badge)
 ![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-Live-green?style=for-the-badge)
 
-An interactive 3-day study plan for mastering Claude Code Sub-Agents with downloadable resources, progress tracking, and hands-on exercises.
+Interactive study plans for mastering Claude Code features with downloadable resources, progress tracking, and hands-on exercises.
 
 ## 🚀 Live Site
 
-**[Access the Interactive Study Plan →](https://sunshine17.github.io/claude-code-study-plan/)**
+**[Study Plans Hub →](https://sunshine17.github.io/claude-code-study-plan/)**  
+**[Sub-Agents Study Plan →](https://sunshine17.github.io/claude-code-study-plan/sub-agents/)**
 
-## 📚 What You'll Learn
+## 📚 Available Study Plans
 
-### Day 1: Foundations
+### 🤖 Sub-Agents Mastery (3 Days)
+Master specialized AI assistants with their own context windows, system prompts, and tool permissions.
+
+**Day 1: Foundations**
 - Core concepts of sub-agents
 - Architecture and delegation patterns
 - Setup and configuration
 - YAML frontmatter format
 
-### Day 2: Implementation  
+**Day 2: Implementation**  
 - Creating your first sub-agents
 - Tool management and permissions
 - Automatic vs manual invocation
 - Production-ready templates
 
-### Day 3: Advanced & Practice
+**Day 3: Advanced & Practice**
 - Multi-agent workflows
 - Parallel execution patterns
 - Team collaboration
 - Real-world implementation
 
+### 🔧 MCP Integration (Coming Soon)
+Deep dive into Model Context Protocol for extending Claude Code with custom tools and integrations.
+
+### ⚡ Advanced Workflows (Coming Soon)
+Master complex development workflows, CI/CD integration, and enterprise-scale deployments.
+
 ## ✨ Features
 
 - **Interactive Progress Tracking**: Check off completed tasks and track study time
-- **Downloadable Resources**: Access 200+ production-ready sub-agents
+- **Downloadable Resources**: Access 200+ production-ready resources
 - **Quick Setup Commands**: Copy-paste installation scripts  
 - **Mobile Responsive**: Study anywhere on any device
 - **Local Storage**: Your progress is saved automatically
 
-## 📦 Included Resources
-
-- **75 Production Agents** by Seth Hobson
-- **100+ Specialized Agents** by VoltAgent  
-- **Workflow Systems** with multi-agent pipelines
-- **Cheat Sheets & Guides** for quick reference
-
 ## 🎯 Quick Start
 
-1. Visit the [live study plan](https://sunshine17.github.io/claude-code-study-plan/)
-2. Download the ready-made agent collections
-3. Follow the 3-day curriculum
+1. Visit the [Study Plans Hub](https://sunshine17.github.io/claude-code-study-plan/)
+2. Choose your learning path
+3. Follow the interactive curriculum
 4. Practice with real projects
 
 ## 🛠️ Local Development
